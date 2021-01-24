@@ -6,7 +6,7 @@ import './App.css'
 const socket = io.connect('http://localhost:4000')
 
 function App() {
-  const [state, setStaet] = useState({ message: '', name: '' })
+  const [state, setState] = useState({ message: '', name: '' })
   const [chat, setChat] = useState([])
 
   useEffect(() => {
@@ -16,14 +16,14 @@ function App() {
   })
 
   const onTextChange = e => {
-    setStaet({ ...state, [e.target.name]: e.target.value })
+    setState({ ...state, [e.target.name]: e.target.value })
   }
 
   const onMessageSubmit = e => {
     e.preventDefault()
     const { name, message } = state
     socket.emit('message', { name, message })
-    setStaet({ message: '', name })
+    setState({ message: '', name })
   }
 
   const renderChat = () => {
